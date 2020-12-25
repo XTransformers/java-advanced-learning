@@ -5,13 +5,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.xtransformers</groupId>
-    <artifactId>java-advanced-learning</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <parent>
+        <groupId>com.xtransformers</groupId>
+        <artifactId>java-advanced-learning</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-    <modules>
-        <module>algo</module>
-    </modules>
+    <artifactId>algo</artifactId>
 
 </project>
