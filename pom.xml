@@ -12,6 +12,7 @@
 
     <modules>
         <module>algo</module>
+        <module>leet-code</module>
     </modules>
 
     <properties>
