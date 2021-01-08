@@ -13,6 +13,7 @@
     <modules>
         <module>algo</module>
         <module>leet-code</module>
+        <module>cache</module>
     </modules>
 
     <properties>
