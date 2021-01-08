@@ -1,0 +1,4 @@
+GET http://localhost:8081/user/list
+###
+GET http://localhost:8081/user/find/1
+###
