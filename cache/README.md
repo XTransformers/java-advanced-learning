@@ -36,3 +36,15 @@ Running 10s test @ http://localhost:8081/user/list
   101778 requests in 10.10s, 20.98MB read
 Requests/sec:  10076.34
 Transfer/sec:      2.08MB
+
+5. 开启 Spring Cache + Redis。
+5.1 默认序列化方式：Java自带序列化、反序列化方式
+wrk http://localhost:8081/user/list
+Running 10s test @ http://localhost:8081/user/list
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.49ms    0.97ms  18.75ms   93.02%
+    Req/Sec     2.00k   204.70     2.98k    77.50%
+  39840 requests in 10.01s, 8.21MB read
+Requests/sec:   3978.35
+Transfer/sec:    839.91KB

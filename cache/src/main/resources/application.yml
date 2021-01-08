@@ -7,11 +7,14 @@ spring:
     url: jdbc:mysql://localhost:3305/test?useUnicode=true&characterEncoding=utf-8&serverTimeZone=UTC
     username: root
     password:
-# 可以不用配置，默认可自动装配。如xml文件名称如不是默认的 ehcache，则必须配置。
-#  cache:
-#    type: ehcache
-#    ehcache:
-#      config: classpath:/ehcache.xml
+  cache:
+    type: redis
+  redis:
+    host: 192.168.56.95
+    lettuce:
+      pool:
+        max-active: 16
+        max-wait: 10ms
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
