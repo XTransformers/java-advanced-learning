@@ -14,3 +14,13 @@ Running 10s test @ http://localhost:8081/user/list
 Requests/sec:   5626.81
 Transfer/sec:      1.16MB
 
+3.开启 MyBatis 的二级缓存，基于 Ehcache。
+wrk http://localhost:8081/user/list
+Running 10s test @ http://localhost:8081/user/list
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   846.00us  528.05us  19.11ms   91.33%
+    Req/Sec     5.15k     1.13k   10.82k    84.50%
+  102489 requests in 10.01s, 21.13MB read
+Requests/sec:  10241.35
+Transfer/sec:      2.11MB
