@@ -21,4 +21,27 @@
         from user
     </select>
 
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into user(name, age)
+        values(#{user.name}, #{user.age})
+    </insert>
+
+    <delete id="delete">
+        delete from user
+        where id = #{id}
+    </delete>
+
+    <update id="update">
+        update user
+        <set>
+            <if test="user.name != null and user.name != ''">
+                name = #{user.name},
+            </if>
+            <if test="user.age != null">
+                age = #{user.age},
+            </if>
+        </set>
+        where id = #{user.id}
+    </update>
+
 </mapper>

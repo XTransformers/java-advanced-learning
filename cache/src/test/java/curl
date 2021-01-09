@@ -1,0 +1,7 @@
+
+# curl 调用接口脚本
+curl -H "Content-Type:application/json" -X POST --data "{\"name\":\"Smith\",\"age\":33}" http://localhost:8081/users
+curl -H "Content-Type:application/json" -X PUT --data "{\"id\":8,\"name\":\"John\",\"age\":18}" http://localhost:8081/users
+curl -X DELETE http://localhost:8081/users/8
+curl http://localhost:8081/users
+curl http://localhost:8081/users/7

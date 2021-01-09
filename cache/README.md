@@ -48,3 +48,13 @@ Running 10s test @ http://localhost:8081/user/list
   39840 requests in 10.01s, 8.21MB read
 Requests/sec:   3978.35
 Transfer/sec:    839.91KB
+
+5.2 自定义序列化方式 JSON <- new GenericJackson2JsonRedisSerializer()
+```bash
+192.168.56.95:6379> get "userCache::list"
+"[\"java.util.ArrayList\",[{\"@class\":\"com.xtransformers.entity.User\",\"id\":1,\"name\":\"KK\",\"age\":19},{\"@class\":\"com.xtransformers.entity.User\",\"id\":2,\"name\":\"CC\",\"age\":20},{\"@class\":\"com.xtransformers.entity.User\",\"id\":3,\"name\":\"MM\",\"age\":21}]]"
+192.168.56.95:6379> get "userCache::2"
+"{\"@class\":\"com.xtransformers.entity.User\",\"id\":2,\"name\":\"CC\",\"age\":20}"
+```
+自定义 Cache key - KeyGenerator。
+
