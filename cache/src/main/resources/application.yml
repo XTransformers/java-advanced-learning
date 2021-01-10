@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3305/test?useUnicode=true&characterEncoding=utf-8&serverTimeZone=UTC
+    username: root
+    password:
+  cache:
+    type: redis
+  redis:
+    host: 192.168.56.95
+    lettuce:
+      pool:
+        max-active: 16
+        max-wait: 10ms
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+logging:
+  level:
+    com:
+      xtransformers:
+        dao: debug
