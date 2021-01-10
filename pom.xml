@@ -14,6 +14,7 @@
         <module>algo</module>
         <module>leet-code</module>
         <module>cache</module>
+        <module>redis-demo</module>
     </modules>
 
     <properties>
