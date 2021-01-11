@@ -2,6 +2,8 @@ package com.xtransformers.redis;
 
 public interface Constants {
 
+    String REDIS_SCHEMA_PREFIX = "redis://";
+
     String REDIS_HOST = "192.168.56.95";
     int REDIS_PORT_6379 = 6379;
     int REDIS_PORT_6380 = 6380;

@@ -22,9 +22,9 @@ public class RedissionSentinelDemo {
         config.setCodec(new StringCodec())
                 .useSentinelServers()
                 .setMasterName(SENTINEL_MASTER_NAME)
-                .addSentinelAddress("redis://" + REDIS_HOST + ":" + SENTINEL_PORT_26379)
-                .addSentinelAddress("redis://" + REDIS_HOST + ":" + SENTINEL_PORT_26380)
-                .addSentinelAddress("redis://" + REDIS_HOST + ":" + SENTINEL_PORT_26381);
+                .addSentinelAddress(REDIS_SCHEMA_PREFIX + REDIS_HOST + ":" + SENTINEL_PORT_26379)
+                .addSentinelAddress(REDIS_SCHEMA_PREFIX + REDIS_HOST + ":" + SENTINEL_PORT_26380)
+                .addSentinelAddress(REDIS_SCHEMA_PREFIX + REDIS_HOST + ":" + SENTINEL_PORT_26381);
         RedissonClient client = Redisson.create(config);
 
         RedisMasterSlave redisNodes = client.getRedisNodes(RedisNodes.SENTINEL_MASTER_SLAVE);
