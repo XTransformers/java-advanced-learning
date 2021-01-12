@@ -23,6 +23,7 @@
         <module>leet-code</module>
         <module>cache</module>
         <module>redis-demo</module>
+        <module>activemq-demo</module>
     </modules>
 
     <properties>
