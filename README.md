@@ -6,3 +6,5 @@
 ## redis-demo Redis相关示例
 
 ## activemq-demo ActiveMQ 相关示例
+
+## kafka-demo Kafka 相关示例

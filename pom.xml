@@ -24,6 +24,7 @@
         <module>cache</module>
         <module>redis-demo</module>
         <module>activemq-demo</module>
+        <module>kafka-demo</module>
     </modules>
 
     <properties>
