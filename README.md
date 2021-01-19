@@ -8,3 +8,5 @@
 ## activemq-demo ActiveMQ 相关示例
 
 ## kafka-demo Kafka 相关示例
+
+## rabbitmq-demo RabbitMQ 相关示例

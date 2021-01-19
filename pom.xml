@@ -25,6 +25,7 @@
         <module>redis-demo</module>
         <module>activemq-demo</module>
         <module>kafka-demo</module>
+        <module>rabbitmq-demo</module>
     </modules>
 
     <properties>
