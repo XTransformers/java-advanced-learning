@@ -10,3 +10,5 @@
 ## kafka-demo Kafka 相关示例
 
 ## rabbitmq-demo RabbitMQ 相关示例
+
+## custom-mq-core 自定义MQ
