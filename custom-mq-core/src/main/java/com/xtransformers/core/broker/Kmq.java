@@ -4,9 +4,6 @@ import com.xtransformers.core.entity.KmqMessage;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-
 public final class Kmq<T> {
 
     @Getter
@@ -15,25 +12,27 @@ public final class Kmq<T> {
     @Getter
     private int capacity;
 
-    private LinkedBlockingQueue<KmqMessage<T>> queue;
+    private int writeIndex;
+
+    private KmqMessage<T>[] queue;
 
     public Kmq(String topic, int capacity) {
         this.topic = topic;
         this.capacity = capacity;
-        this.queue = new LinkedBlockingQueue<>(capacity);
+        this.queue = new KmqMessage[capacity];
+        this.writeIndex = 0;
     }
 
     public boolean send(KmqMessage<T> message) {
-        return queue.offer(message);
-    }
-
-    public KmqMessage<T> poll() {
-        return queue.poll();
+        if (writeIndex >= capacity)
+            return false;
+        queue[writeIndex++] = message;
+        return true;
     }
 
     @SneakyThrows
-    public KmqMessage<T> poll(long timeout) {
-        return queue.poll(timeout, TimeUnit.MILLISECONDS);
+    public KmqMessage<T> poll(int offset) {
+        return queue[offset];
     }
 
 }

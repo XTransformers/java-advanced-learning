@@ -29,8 +29,8 @@ public class KmqBroker<T> {
         return new KmqProducer<>(this);
     }
 
-    public KmqConsumer<T> createConsumer() {
-        return new KmqConsumer<>(this);
+    public KmqConsumer<T> createConsumer(String name) {
+        return new KmqConsumer<>(name, this);
     }
 
 }

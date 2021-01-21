@@ -18,20 +18,9 @@ public class KmqDemo {
         KmqBroker<Order> broker = new KmqBroker<>();
         broker.createTopic(topic);
 
-        KmqConsumer<Order> consumer = broker.createConsumer();
-        consumer.subscribe(topic);
+        createConsumerThread(topic, broker, "consumer-test");
 
-        Thread consumerThread = new Thread(() -> {
-            while (true) {
-                KmqMessage<Order> message = consumer.poll(100);
-                if (message != null) {
-                    System.out.println(message.getBody());
-                }
-            }
-        });
-        // 利用守护线程机制，退出程序
-        consumerThread.setDaemon(true);
-        consumerThread.start();
+        createConsumerThread(topic, broker, "consumer-test2");
 
         Random random = new Random();
         String[] symbolArray = new String[]{"CNY2USD", "USD2CNY"};
@@ -64,6 +53,23 @@ public class KmqDemo {
             }
         }
         System.out.println("producer exit.");
+    }
+
+    private static void createConsumerThread(String topic, KmqBroker<Order> broker, String name) {
+        KmqConsumer<Order> consumer = broker.createConsumer(name);
+        consumer.subscribe(topic);
+
+        Thread consumerThread = new Thread(() -> {
+            while (true) {
+                KmqMessage<Order> message = consumer.poll();
+                if (message != null) {
+                    System.out.println(Thread.currentThread().getName() + " " + message.getBody());
+                }
+            }
+        });
+        // 利用守护线程机制，退出程序
+        consumerThread.setDaemon(true);
+        consumerThread.start();
     }
 
 }
