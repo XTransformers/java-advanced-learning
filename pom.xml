@@ -28,6 +28,7 @@
         <module>rabbitmq-demo</module>
         <module>custom-mq-core</module>
         <module>reactor-demo</module>
+        <module>bytebuddy-demo</module>
     </modules>
 
     <properties>
