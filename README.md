@@ -12,3 +12,5 @@
 ## rabbitmq-demo RabbitMQ 相关示例
 
 ## custom-mq-core 自定义MQ
+
+## bloom-filter-demo 布隆过滤器相关示例

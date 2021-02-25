@@ -27,6 +27,7 @@
         <module>kafka-demo</module>
         <module>rabbitmq-demo</module>
         <module>custom-mq-core</module>
+        <module>bloom-filter-demo</module>
     </modules>
 
     <properties>
