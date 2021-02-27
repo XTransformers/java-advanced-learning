@@ -28,6 +28,7 @@
         <module>rabbitmq-demo</module>
         <module>custom-mq-core</module>
         <module>bloom-filter-demo</module>
+        <module>Design-Pattern</module>
     </modules>
 
     <properties>
