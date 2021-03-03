@@ -29,6 +29,7 @@
         <module>custom-mq-core</module>
         <module>bloom-filter-demo</module>
         <module>Design-Pattern</module>
+        <module>netty-demo</module>
     </modules>
 
     <properties>
