@@ -31,6 +31,7 @@
         <module>Design-Pattern</module>
         <module>netty-demo</module>
         <module>reactor-demo</module>
+        <module>bytebuddy-demo</module>
     </modules>
 
     <properties>
