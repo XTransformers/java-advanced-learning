@@ -33,6 +33,7 @@
         <module>reactor-demo</module>
         <module>bytebuddy-demo</module>
         <module>java8-in-action</module>
+        <module>security</module>
     </modules>
 
     <properties>
