@@ -73,6 +73,7 @@ public class OptionalDemo {
                 .orElse(0);
     }
 
+    // 优雅的实现
     public int readDurationOptional1(Properties properties, String name) {
         return Optional.ofNullable(properties.getProperty(name))
                 .flatMap(OptionalUtility::stringToInt)
