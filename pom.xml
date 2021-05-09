@@ -34,6 +34,7 @@
         <module>bytebuddy-demo</module>
         <module>java8-in-action</module>
         <module>security</module>
+        <module>spring-transactional-demo</module>
     </modules>
 
     <properties>
