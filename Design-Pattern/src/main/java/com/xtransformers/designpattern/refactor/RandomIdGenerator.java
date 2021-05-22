@@ -27,8 +27,36 @@ public class RandomIdGenerator implements LogTraceIdGenerator {
         return id;
     }
 
+    private String getLastFieldOfHostName() {
+        String substrOfHostName = null;
+        try {
+            String hostName = InetAddress.getLocalHost().getHostName();
+            substrOfHostName = getLastSubstrSplittedByDot(hostName);
+        } catch (UnknownHostException e) {
+            logger.warn("Fail to get the host name.", e);
+        }
+        return substrOfHostName;
+    }
+
+    @VisibleForTesting
+    protected String getLastSubstrSplittedByDot(String hostName) {
+        if (hostName == null) {
+            return null;
+        }
+        String substrOfHostName;
+        String[] tokens = hostName.split("\\.");
+        substrOfHostName = tokens[tokens.length - 1];
+        return substrOfHostName;
+    }
+
     @VisibleForTesting
     protected String generateRandomAlphameric(int length) {
+        if (length < 0) {
+            return null;
+        } else if (length == 0) {
+            return "";
+        }
+
         char[] randomChars = new char[length];
         int count = 0;
         Random random = new Random();
@@ -44,24 +72,5 @@ public class RandomIdGenerator implements LogTraceIdGenerator {
             }
         }
         return new String(randomChars);
-    }
-
-    private String getLastFieldOfHostName() {
-        String substrOfHostName = null;
-        try {
-            String hostName = InetAddress.getLocalHost().getHostName();
-            substrOfHostName = getLastSubstrSplittedByDot(hostName);
-        } catch (UnknownHostException e) {
-            logger.warn("Fail to get the host name.", e);
-        }
-        return substrOfHostName;
-    }
-
-    @VisibleForTesting
-    protected String getLastSubstrSplittedByDot(String hostName) {
-        String substrOfHostName;
-        String[] tokens = hostName.split("\\.");
-        substrOfHostName = tokens[tokens.length - 1];
-        return substrOfHostName;
     }
 }
