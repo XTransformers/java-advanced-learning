@@ -1,6 +1,7 @@
 package com.xtransformers.designpattern.refactor;
 
 import com.google.common.collect.Sets;
+import com.xtransformers.designpattern.refactor.exception.IdGenerationFailureException;
 import org.junit.Test;
 
 import java.util.Set;
@@ -10,7 +11,7 @@ import static org.junit.Assert.*;
 public class RandomIdGeneratorTest {
 
     @Test
-    public void generate() {
+    public void generate() throws IdGenerationFailureException {
         RandomIdGenerator idGenerator = new RandomIdGenerator();
         String actualRandomStr;
         Set<String> set = Sets.newHashSet();
