@@ -1,5 +1,6 @@
 package com.xtransformers.designpattern.refactor;
 
+import com.google.common.annotations.VisibleForTesting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,8 @@ public class RandomIdGenerator implements LogTraceIdGenerator {
         return id;
     }
 
-    private String generateRandomAlphameric(int length) {
+    @VisibleForTesting
+    protected String generateRandomAlphameric(int length) {
         char[] randomChars = new char[length];
         int count = 0;
         Random random = new Random();
@@ -48,12 +50,18 @@ public class RandomIdGenerator implements LogTraceIdGenerator {
         String substrOfHostName = null;
         try {
             String hostName = InetAddress.getLocalHost().getHostName();
-            String[] tokens = hostName.split("\\.");
-            substrOfHostName = tokens[tokens.length - 1];
-            return substrOfHostName;
+            substrOfHostName = getLastSubstrSplittedByDot(hostName);
         } catch (UnknownHostException e) {
             logger.warn("Fail to get the host name.", e);
         }
+        return substrOfHostName;
+    }
+
+    @VisibleForTesting
+    protected String getLastSubstrSplittedByDot(String hostName) {
+        String substrOfHostName;
+        String[] tokens = hostName.split("\\.");
+        substrOfHostName = tokens[tokens.length - 1];
         return substrOfHostName;
     }
 }
