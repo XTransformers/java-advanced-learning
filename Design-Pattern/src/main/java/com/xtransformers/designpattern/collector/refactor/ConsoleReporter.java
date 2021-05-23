@@ -1,7 +1,4 @@
-package com.xtransformers.designpattern.collector.v1;
-
-import com.google.common.collect.Maps;
-import com.google.gson.Gson;
+package com.xtransformers.designpattern.collector.refactor;
 
 import java.util.List;
 import java.util.Map;
@@ -16,10 +13,14 @@ import java.util.concurrent.TimeUnit;
 public class ConsoleReporter {
 
     private MetricsStorage metricsStorage;
+    private Aggregator aggregator;
+    private StatViewer statViewer;
     private ScheduledExecutorService executor;
 
-    public ConsoleReporter(MetricsStorage metricsStorage) {
+    public ConsoleReporter(MetricsStorage metricsStorage, Aggregator aggregator, StatViewer statViewer) {
         this.metricsStorage = metricsStorage;
+        this.aggregator = aggregator;
+        this.statViewer = statViewer;
         executor = Executors.newSingleThreadScheduledExecutor();
     }
 
@@ -32,18 +33,10 @@ public class ConsoleReporter {
 
             // 第1个代码逻辑：根据给定的时间区间，从数据库中拉取数据；
             Map<String, List<RequestInfo>> requestInfos = metricsStorage.getRequestInfos(startInMillis, endInMillis);
-
             // 第2个代码逻辑：根据原始数据，计算得到统计数据；
-            Map<String, RequestStat> stats = Maps.newHashMap();
-            requestInfos.forEach((apiName, requestInfoList) -> {
-                RequestStat requestStat = Aggregator.aggregate(requestInfoList, durationInMillis);
-                stats.put(apiName, requestStat);
-            });
-
+            Map<String, RequestStat> stats = aggregator.aggregate(requestInfos, durationInMillis);
             // 第3个代码逻辑：将统计数据显示到终端（命令行或邮件）；
-            System.out.println("Time span [" + startInMillis + ", " + endInMillis + "]");
-            Gson gson = new Gson();
-            System.out.println(gson.toJson(stats));
+            statViewer.output(stats, startInMillis, endInMillis);
         }, 0, periodInSeconds, TimeUnit.SECONDS);
     }
 }

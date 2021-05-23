@@ -1,4 +1,4 @@
-package com.xtransformers.designpattern.collector.v1;
+package com.xtransformers.designpattern.collector.refactor;
 
 import lombok.Builder;
 import lombok.Data;

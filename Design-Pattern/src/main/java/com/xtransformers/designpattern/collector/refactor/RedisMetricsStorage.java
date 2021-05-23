@@ -1,4 +1,4 @@
-package com.xtransformers.designpattern.collector.v1;
+package com.xtransformers.designpattern.collector.refactor;
 
 import java.util.List;
 import java.util.Map;

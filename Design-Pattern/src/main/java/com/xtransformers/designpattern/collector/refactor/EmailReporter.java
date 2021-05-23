@@ -1,7 +1,4 @@
-package com.xtransformers.designpattern.collector.v1;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+package com.xtransformers.designpattern.collector.refactor;
 
 import java.util.*;
 
@@ -14,20 +11,13 @@ public class EmailReporter {
     private static final long DAY_HOURS_IN_SECONDS = 86400L;
 
     private MetricsStorage metricsStorage;
-    private EmailSender emailSender;
-    private List<String> toAddresses = Lists.newArrayList();
+    private Aggregator aggregator;
+    private StatViewer statViewer;
 
-    public EmailReporter(MetricsStorage metricsStorage) {
-        this(metricsStorage, new EmailSender());
-    }
-
-    public EmailReporter(MetricsStorage metricsStorage, EmailSender emailSender) {
+    public EmailReporter(MetricsStorage metricsStorage, Aggregator aggregator, StatViewer statViewer) {
         this.metricsStorage = metricsStorage;
-        this.emailSender = emailSender;
-    }
-
-    public void addAddress(String email) {
-        toAddresses.add(email);
+        this.aggregator = aggregator;
+        this.statViewer = statViewer;
     }
 
     public void startDailyReport() {
@@ -48,16 +38,10 @@ public class EmailReporter {
 
                 // 第1个代码逻辑：根据给定的时间区间，从数据库中拉取数据；
                 Map<String, List<RequestInfo>> requestInfos = metricsStorage.getRequestInfos(startInMillis, endInMillis);
-
                 // 第2个代码逻辑：根据原始数据，计算得到统计数据；
-                Map<String, RequestStat> stats = Maps.newHashMap();
-                requestInfos.forEach((apiName, requestInfoList) -> {
-                    RequestStat requestStat = Aggregator.aggregate(requestInfoList, durationInMillis);
-                    stats.put(apiName, requestStat);
-                });
-
+                Map<String, RequestStat> stats = aggregator.aggregate(requestInfos, durationInMillis);
                 // 第3个代码逻辑：将统计数据显示到终端（命令行或邮件）；
-                // TODO: 格式化为html格式，并且发送邮件
+                statViewer.output(stats, startInMillis, endInMillis);
             }
         }, firstTime, DAY_HOURS_IN_SECONDS * 1000);
     }
