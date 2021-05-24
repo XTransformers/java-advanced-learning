@@ -2,10 +2,7 @@ package com.xtransformers.designpattern.collector.refactor;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * @author daniel
@@ -15,6 +12,12 @@ public class EmailReporter extends AbstractScheduledReporter {
 
     private static final long DAY_HOURS_IN_SECONDS = 86400L;
 
+    // 兼顾代码的易用性，新增一个封装了默认依赖的构造函数
+    public EmailReporter(List<String> addressList) {
+        this(new RedisMetricsStorage(), new Aggregator(), new EmailViewer(addressList));
+    }
+
+    // 兼顾灵活性和代码的可测试性，这个构造函数继续保留
     public EmailReporter(MetricsStorage metricsStorage, Aggregator aggregator, StatViewer statViewer) {
         super(metricsStorage, aggregator, statViewer);
     }

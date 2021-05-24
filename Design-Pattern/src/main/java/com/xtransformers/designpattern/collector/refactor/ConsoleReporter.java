@@ -12,6 +12,12 @@ public class ConsoleReporter extends AbstractScheduledReporter {
 
     private ScheduledExecutorService executor;
 
+    // 兼顾代码的易用性，新增一个封装了默认依赖的构造函数
+    public ConsoleReporter() {
+        this(new RedisMetricsStorage(), new Aggregator(), new ConsoleViewer());
+    }
+
+    // 兼顾灵活性和代码的可测试性，这个构造函数继续保留
     public ConsoleReporter(MetricsStorage metricsStorage, Aggregator aggregator, StatViewer statViewer) {
         super(metricsStorage, aggregator, statViewer);
         executor = Executors.newSingleThreadScheduledExecutor();
