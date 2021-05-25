@@ -23,7 +23,7 @@ public class Client {
         emailReporter.startDailyReport();
 
         // 收集接口访问数据，可以放到 AOP 切面中
-        MetricsCollector metricsCollector = new MetricsCollector(storage);
+        MetricsCollector metricsCollector = new MetricsCollector(storage, 20);
         double timestamp = System.currentTimeMillis();
         double responseTime = new Random().nextDouble();
         metricsCollector.recordRequest(
