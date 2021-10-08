@@ -1,4 +1,4 @@
-package com.xtransformers.multithread;
+package com.xtransformers.multithread.future;
 
 import java.util.concurrent.*;
 
