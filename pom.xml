@@ -36,6 +36,7 @@
         <module>security</module>
         <module>spring-transactional-demo</module>
         <module>circuit-breaker-demo</module>
+        <module>multithread-demo</module>
     </modules>
 
     <properties>
