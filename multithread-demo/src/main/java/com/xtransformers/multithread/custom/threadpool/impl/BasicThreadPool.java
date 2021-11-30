@@ -12,11 +12,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 初始化线程池
+ * 修改 BasicThreadPool 和 Thread 的继承关系为组合关系
  *
  * @author daniel
  * @date 2021-11-30
  */
-public class BasicThreadPool extends Thread implements ThreadPool {
+public class BasicThreadPool implements ThreadPool {
 
     private final int initSize;
 
@@ -43,6 +44,8 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 
     private final TimeUnit timeUnit;
 
+    private final Thread thread = new Thread(this::maintain, "Maintain-Thread");
+
     public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
         this(initSize, maxSize, coreSize, DEFAULT_THREAD_FACTORY, queueSize, DEFAULT_DENY_POLICY, 10, TimeUnit.SECONDS);
     }
@@ -60,7 +63,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
     }
 
     private void init() {
-        start();
+        thread.start();
         for (int i = 0; i < initSize; i++) {
             newThread();
         }
@@ -91,11 +94,10 @@ public class BasicThreadPool extends Thread implements ThreadPool {
         runnableQueue.offer(runnable);
     }
 
-    @Override
-    public void run() {
+    public void maintain() {
         // 线程池自动维护
         // 继承自 Thread，主要用于维护线程数量，比如扩容、回收等工作
-        while (!isShutdown && !isInterrupted()) {
+        while (!isShutdown && !thread.isInterrupted()) {
             try {
                 timeUnit.sleep(keepAliveTime);
             } catch (InterruptedException e) {
@@ -142,7 +144,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
                 threadTask.internalTask.stop();
                 threadTask.thread.interrupt();
             });
-            interrupt();
+            thread.interrupt();
         }
     }
 
