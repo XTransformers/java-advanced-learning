@@ -23,6 +23,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.dreamroute</groupId>
+            <artifactId>hikari-spring-boot-starter</artifactId>
+            <version>1.4-RELEASE</version>
+        </dependency>
     </dependencies>
 
     <properties>
